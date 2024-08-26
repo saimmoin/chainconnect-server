@@ -3,6 +3,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const usersRouter = require("./routes/userRouter");
+const likesRouter = require("./routes/likesRouter");
+const commentRouter = require("./routes/commentRouter");
 
 require("dotenv").config();
 const DBString = process.env.DATABASE_URL;
@@ -12,7 +14,9 @@ const app = express();
 
 //Allows us to accept the data in JSON format
 app.use(express.json());
-app.use("/users", usersRouter);
+app.use("/user", usersRouter);
+app.use("/like", likesRouter);
+app.use("/comment", commentRouter);
 
 //DATABASE Connection
 mongoose.connect(DBString);

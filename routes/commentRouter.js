@@ -7,3 +7,5 @@ const { getComment, setComment } = require("../controllers/commentController");
 
 router.get("/", getComment);
 router.post("/", setComment);
+
+module.exports = router;

@@ -7,3 +7,5 @@ const { getLikes, setLikes } = require("../controllers/likesController");
 
 router.get("/", getLikes);
 router.post("/", setLikes);
+
+module.exports = router;
