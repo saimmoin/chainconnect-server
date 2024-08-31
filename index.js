@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const usersRouter = require("./routes/userRouter");
 const likesRouter = require("./routes/likesRouter");
 const commentRouter = require("./routes/commentRouter");
+const copyRouter = require("./routes/copyRouter");
 
 require("dotenv").config();
 const DBString = process.env.DATABASE_URL;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/user", usersRouter);
 app.use("/like", likesRouter);
 app.use("/comment", commentRouter);
+app.use("/copy", copyRouter);
 
 //DATABASE Connection
 mongoose.connect(DBString);

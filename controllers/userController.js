@@ -2,13 +2,15 @@
 
 const User = require("../models/userModel");
 
-const getUser = async (req, res) => {
+const getUserFolowersFollowing = async (req, res) => {
   try {
-    const users = await User.findOne({ userAddress: req.param.userAddress });
-    if (!users) {
+    const user = await User.findOne({ userAddress: req.param.userAddress });
+    if (!user) {
       throw new Error("no user");
     }
-    res.json(users);
+    res.json({
+      data: user,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -29,9 +31,15 @@ const unfollow = async (req, res) => {
 
 const follow = async (req, res) => {
   try {
+    const { userAddress, followerAddress } = req.body;
+    const userFollowing = await User.updateOne({ address: userAddress }, { $addToSet: { following: followerAddress } }, { new: true });
+
+    const userFollower = await User.updateOne({ address: followerAddress }, { $addToSet: { followers: userAddress } }, { new: true });
+
+    res.status(200).json({ data: { userAddress, userFollowing, userFollower } });
   } catch (error) {
     res.status(500).json({ message: err.message });
   }
 };
 
-module.exports = { follow, unfollow, getUser };
+module.exports = { follow, unfollow, getUserFolowersFollowing };
