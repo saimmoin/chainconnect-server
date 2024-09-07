@@ -4,7 +4,8 @@ const User = require("../models/userModel");
 
 const getUserFolowersFollowing = async (req, res) => {
   try {
-    const user = await User.findOne({ userAddress: req.param.userAddress });
+    console.log('get userdata request', req.params.address);
+    const user = await User.findOne({ userAddress: req.params.address });
     if (!user) {
       throw new Error("no user");
     }

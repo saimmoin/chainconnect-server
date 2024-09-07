@@ -6,7 +6,7 @@ const User = require("../models/userModel");
 const { follow, unfollow, getUserFolowersFollowing } = require("../controllers/userController");
 
 // Get user
-router.get("/:id", getUserFolowersFollowing);
+router.get("/:address", getUserFolowersFollowing);
 
 // Follow user
 router.post("/", follow);
